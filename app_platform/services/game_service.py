@@ -42,6 +42,3 @@ class GameService(IGameService):
             for player in monthly_players
         ]
         PlayersGames.objects.bulk_create(players_games_instances)
-        import ipdb
-
-        ipdb.set_trace()
