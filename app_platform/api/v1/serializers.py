@@ -1,9 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from app_platform.models import (
-    PlayersGames, Player, PlayerBill,
-    Game
-)
+from app_platform.models import PlayersGames, Player, PlayerBill, Game
 
 
 class PlayerSerializer(ModelSerializer):

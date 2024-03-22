@@ -1,7 +1,12 @@
 from rest_framework.routers import SimpleRouter
 from rest_framework_nested.routers import NestedSimpleRouter
 
-from app_platform.api.v1.viewsets import PlayerViewSet, PlayerBillViewSet, GameViewSet, PlayersGamesViewSet
+from app_platform.api.v1.viewsets import (
+    PlayerViewSet,
+    PlayerBillViewSet,
+    GameViewSet,
+    PlayersGamesViewSet,
+)
 
 player_router = SimpleRouter()
 player_router.register(r"players", viewset=PlayerViewSet)

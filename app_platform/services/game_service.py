@@ -41,4 +41,4 @@ class GameService(IGameService):
             )
             for player in monthly_players
         ]
-        PlayersGames.objects.bulk_create(players_games_instances)
+        self.__players_games_repository.bulk_create(players_games_instances)
