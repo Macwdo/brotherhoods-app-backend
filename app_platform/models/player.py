@@ -41,7 +41,9 @@ class PlayerVisits(BaseModel):
 class PlayerBill(BaseModel):
     due_date = models.DateTimeField()
     payed_date = models.DateTimeField()
-    payed_value = models.DecimalField(max_digits=5, decimal_places=2, blank=False)
+    payed_value = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=False
+    )
 
     player = models.ForeignKey(
         "Player", related_name="bills", on_delete=models.PROTECT

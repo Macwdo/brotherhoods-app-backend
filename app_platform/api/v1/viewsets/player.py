@@ -1,9 +1,12 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from app_platform.api.v1.serializers import PlayerSerializer, PlayerBillSerializer, PlayersGamesSerializer
+from app_platform.api.v1.serializers import (
+    PlayerSerializer,
+    PlayerBillSerializer,
+    PlayersGamesSerializer,
+)
 from app_platform.models import Player, PlayerBill, PlayersGames
-
 
 
 class PlayerViewSet(ModelViewSet):

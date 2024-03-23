@@ -13,6 +13,7 @@ from app_platform.models import Game
 
 logger = logging.getLogger(__name__)
 
+
 class GameViewSet(ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
@@ -21,9 +22,9 @@ class GameViewSet(ModelViewSet):
     @action(detail=False, methods=["POST"], url_path="week")
     def create_week_game(self, request: Request):
         try:
-            game = GameService().create_week_game()
+            GameService().create_week_game()
             return Response(status=status.HTTP_200_OK)
 
-        except Exception as e:
+        except Exception:
             logger.error("Error trying to create a week game")
             raise

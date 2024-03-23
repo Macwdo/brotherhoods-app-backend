@@ -20,8 +20,7 @@ class GameService:
 
     def __add_all_monthly_players(self, game):
         monthly_players = (
-            self.__player_repository
-            .get_monthly_players()
+            self.__player_repository.get_monthly_players()
             .get_active_players()
             .values("id", "is_monthly_player")
         )
