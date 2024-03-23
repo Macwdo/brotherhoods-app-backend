@@ -18,8 +18,8 @@ nested_player_router.register("games", viewset=PlayersGamesViewSet, basename="pl
 game_router = SimpleRouter()
 game_router.register(r"games", viewset=GameViewSet)
 
-nested_games_router = NestedSimpleRouter(game_router, "games")
-nested_games_router.register("players", viewset=PlayersGamesViewSet)
+nested_games_router = NestedSimpleRouter(game_router, "games", lookup="game")
+nested_games_router.register("players", viewset=PlayersGamesViewSet, basename="game-players")
 
 
 v1_router = SimpleRouter()
