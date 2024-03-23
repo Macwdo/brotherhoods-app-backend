@@ -17,7 +17,7 @@ class GameService:
     def create_week_game(self) -> Game:
         last_game = self.__repository.get_last_game()
         if not last_game:
-            game = self.__repository.create_last_week_game()
+            game = self.__repository.create_previous_week_game()
             self.__add_all_monthly_players(game)
             return game
 

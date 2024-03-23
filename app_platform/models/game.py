@@ -10,10 +10,11 @@ from app_platform.utils import get_previous_wednesday_date, get_next_wednesday_d
 
 class GameManager(models.Manager):
 
-    def create_next_week_game(self):
+    def create_previous_week_game(self):
         previous_wednesday = get_previous_wednesday_date()
         return self.create(game_day=previous_wednesday)
-    def create_previus_week_game(self):
+
+    def create_next_week_game(self):
         next_wednesday = get_next_wednesday_date()
         return self.create(game_day=next_wednesday)
 
