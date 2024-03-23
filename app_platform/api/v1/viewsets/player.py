@@ -1,13 +1,9 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from app_platform.api.v1.serializers import (
-    GameSerializer,
-    PlayerBillSerializer,
-    PlayerSerializer,
-    PlayersGamesSerializer,
-)
-from app_platform.models import Game, Player, PlayerBill, PlayersGames
+from app_platform.api.v1.serializers import PlayerSerializer, PlayerBillSerializer, PlayersGamesSerializer
+from app_platform.models import Player, PlayerBill, PlayersGames
+
 
 
 class PlayerViewSet(ModelViewSet):
@@ -21,14 +17,20 @@ class PlayerBillViewSet(ModelViewSet):
     serializer_class = PlayerBillSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return self.queryset.filter(player_id=self.kwargs["player_pk"])
 
-class GameViewSet(ModelViewSet):
-    queryset = Game.objects.all()
-    serializer_class = GameSerializer
-    permission_classes = [IsAuthenticated]
+    def perform_create(self, serializer):
+        serializer.save(player_id=self.kwargs["player_pk"])
 
 
 class PlayersGamesViewSet(ModelViewSet):
     queryset = PlayersGames.objects.all()
     serializer_class = PlayersGamesSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(player_id=self.kwargs["player_pk"])
+
+    def perform_create(self, serializer):
+        serializer.save(player_id=self.kwargs["player_pk"])

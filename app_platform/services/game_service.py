@@ -1,38 +1,35 @@
 from abc import ABC, abstractmethod
-from app_platform.models.game import Game as GameModel
+
+import ipdb
+from django.db import transaction
+from app_platform.models.game import Game
 from app_platform.models.player import Player, PlayersGames
 
-from app_platform.services.player_service import PlayerService
 from app_platform.utils import get_next_wednesday_date
-
-
-class IGameService(ABC):
-    @abstractmethod
-    def create_game_day(self):
-        pass
-
-    @abstractmethod
-    def get_month_games(self):
-        pass
 
 
 class GameService:
     def __init__(self):
-        self.__repository = GameModel.objects
+        self.__repository = Game.objects
         self.__players_games_repository = PlayersGames.objects
-        self.__player_service = PlayerService()
+        self.__player_repository = Player.objects
 
     def get_month_games(self):
         pass
 
+    @transaction.atomic
     def create_game_day(self):
         next_wednesday_date = get_next_wednesday_date()
         game = self.__repository.create(game_day=next_wednesday_date)
         self.__add_all_monthly_players(game)
+        return game
 
     def __add_all_monthly_players(self, game):
-        monthly_players = self.__player_service.get_monthly_players().values(
-            "id", "is_monthly_player"
+        monthly_players = (
+            self.__player_repository
+            .get_monthly_players()
+            .get_active_players()
+            .values("id", "is_monthly_player")
         )
         players_games_instances = [
             PlayersGames(
