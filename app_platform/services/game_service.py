@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from app_platform.models import Game as GameModel, PlayersGames
+from app_platform.models.game import Game as GameModel
+from app_platform.models.player import Player, PlayersGames
 
 from app_platform.services.player_service import PlayerService
 from app_platform.utils import get_next_wednesday_date
@@ -15,7 +16,7 @@ class IGameService(ABC):
         pass
 
 
-class GameService(IGameService):
+class GameService:
     def __init__(self):
         self.__repository = GameModel.objects
         self.__players_games_repository = PlayersGames.objects
