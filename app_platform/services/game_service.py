@@ -1,6 +1,3 @@
-from abc import ABC, abstractmethod
-
-import ipdb
 from django.db import transaction
 from app_platform.models.game import Game
 from app_platform.models.player import Player, PlayersGames
@@ -14,11 +11,8 @@ class GameService:
         self.__players_games_repository = PlayersGames.objects
         self.__player_repository = Player.objects
 
-    def get_month_games(self):
-        pass
-
     @transaction.atomic
-    def create_game_day(self):
+    def create_week_game(self) -> Game:
         next_wednesday_date = get_next_wednesday_date()
         game = self.__repository.create(game_day=next_wednesday_date)
         self.__add_all_monthly_players(game)
