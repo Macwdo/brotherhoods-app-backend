@@ -10,6 +10,7 @@ from app_platform.services.game_service import GameService
 
 from app_platform.api.v1.serializers import GameSerializer
 from app_platform.models import Game
+from app_platform.services.game import GameAlreadyExistsException
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,6 @@ class GameViewSet(ModelViewSet):
             GameService().create_week_game()
             return Response(status=status.HTTP_200_OK)
 
-        except Exception:
-            logger.error("Error trying to create a week game")
-            raise
+        except GameAlreadyExistsException:
+            data = {"message": "Não foi possível criar jogo da semana, já foi criado o da ultíma e da proxíma."}
+            return Response(status=status.HTTP_400_BAD_REQUEST, data=data)

@@ -1,7 +1,12 @@
-from datetime import datetime, timedelta, timezone
-
-
+from datetime import timedelta
+from django.utils import timezone
 def get_next_wednesday_date():
-    today = datetime.now(tz=timezone.utc)
+    today = timezone.localdate()
     days_until_wednesday = (2 - today.weekday()) % 7
     return today + timedelta(days=days_until_wednesday)
+
+
+def get_previous_wednesday_date():
+    today = timezone.localdate()
+    days_to_substract = (today.weekday() - 2) % 7
+    return today + timedelta(days=days_to_substract)

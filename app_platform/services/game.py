@@ -5,6 +5,8 @@ from app_platform.models.player import Player, PlayersGames
 from app_platform.utils import get_next_wednesday_date
 
 
+class GameAlreadyExistsException(Exception): ...
+
 class GameService:
     def __init__(self):
         self.__repository = Game.objects
@@ -13,10 +15,19 @@ class GameService:
 
     @transaction.atomic
     def create_week_game(self) -> Game:
-        next_wednesday_date = get_next_wednesday_date()
-        game = self.__repository.create(game_day=next_wednesday_date)
-        self.__add_all_monthly_players(game)
-        return game
+        last_game = self.__repository.get_last_game()
+        if not last_game:
+            game = self.__repository.create_last_week_game()
+            self.__add_all_monthly_players(game)
+            return game
+
+        next_game = self.__repository.get_next_game()
+        if not next_game:
+            game = self.__repository.create_next_week_game()
+            self.__add_all_monthly_players(game)
+            return game
+
+        raise GameAlreadyExistsException()
 
     def __add_all_monthly_players(self, game):
         monthly_players = (
