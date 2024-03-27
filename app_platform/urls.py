@@ -12,4 +12,6 @@ api_v1 += player_router.urls
 api_v1 += game_router.urls
 api_v1 += nested_games_router.urls
 
-urlpatterns = [path(r"v1/", include(api_v1))]
+urlpatterns = [
+    path(r"v1/", include(api_v1))
+]
