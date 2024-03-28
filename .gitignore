@@ -32,19 +32,6 @@ media
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-# Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# File-based project format
-*.iws
-
-# IntelliJ
-out/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
 # Python #
 *.py[cod]
 *$py.class
@@ -82,10 +69,6 @@ htmlcov/
 coverage.xml
 *.cover
 
-
-# pyenv
-.python-version
-
 # celery
 celerybeat-schedule.*
 
@@ -95,10 +78,3 @@ celerybeat-schedule.*
 # mypy
 .mypy_cache/
 
-# Visual Studio Code #
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history
