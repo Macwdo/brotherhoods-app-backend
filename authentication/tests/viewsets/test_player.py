@@ -27,4 +27,4 @@ class PlayerViewSetTest(AuthMixin):
         auth_header = {"Authorization": f"Bearer {token.access}"}
         response = self.client.get(url, headers=auth_header)
 
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        assert response.status_code == status.HTTP_200_OK

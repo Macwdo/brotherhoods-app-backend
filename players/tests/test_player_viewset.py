@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import reverse, resolve
 from rest_framework import status
 
 from authentication.tests.mixins.auth_mixin import AuthMixin
@@ -18,13 +18,23 @@ class PlayerViewSetTest(AuthMixin):
 
         self.__user_credentials = {"username": username, "password": password}
 
+    def test_player_viewset_reverse_list_url(self):
+        reverse_url = "players:player-list"
+        expected_url = "/api/players/"
+        assert reverse(reverse_url) == expected_url
+
+    def test_player_viewset_reverse_detail_url(self):
+        reverse_url = "players:player-detail"
+        expected_url = "/api/players/1/"
+        assert reverse(reverse_url, args=(1,)) == expected_url
+
     def test_authenticated_user_when_get_should_returns_200(self):
         url = reverse("players:player-list")
         credentials = self.__user_credentials
         request = LoginRequest(**credentials)
 
         token = self.get_token(request=request)
-        auth_header = {"Authorization": f"Bearer {token.access_token}"}
+        auth_header = {"Authorization": f"Bearer {token.access}"}
         response = self.client.get(url, headers=auth_header)
 
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        assert response.status_code == status.HTTP_200_OK
