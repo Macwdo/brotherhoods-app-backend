@@ -38,11 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+FRAMEWORKS_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
-    "app_platform",
 ]
+
+APPLICATION_APPS = ["authentication", "games", "players"]
+
+INSTALLED_APPS += FRAMEWORKS_APPS
+INSTALLED_APPS += APPLICATION_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
