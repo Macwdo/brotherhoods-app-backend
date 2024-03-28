@@ -2,10 +2,9 @@ from django.db import transaction
 from app_platform.models.game import Game
 from app_platform.models.player import Player, PlayersGames
 
-from app_platform.utils import get_next_wednesday_date
-
 
 class GameAlreadyExistsException(Exception): ...
+
 
 class GameService:
     def __init__(self):

@@ -1,3 +1,4 @@
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
@@ -9,7 +10,18 @@ from app_platform.api.v1.serializers import (
 from app_platform.models import Player, PlayerBill, PlayersGames
 
 
-class PlayerViewSet(ModelViewSet):
+class ApiAuthMixin:
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class AuthenticedModelViewSet(ModelViewSet, ApiAuthMixin):
+    class Meta:
+        abstract = True
+
+
+
+class PlayerViewSet(AuthenticedModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
     permission_classes = [IsAuthenticated]

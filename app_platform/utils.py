@@ -1,5 +1,7 @@
 from datetime import timedelta
 from django.utils import timezone
+
+
 def get_next_wednesday_date():
     today = timezone.localtime()
     days_until_wednesday = (2 - today.weekday()) % 7

@@ -15,6 +15,7 @@ mypy = "^1.9.0"
 drf-nested-routers = "^0.93.5"
 djangorestframework-simplejwt = "^5.3.1"
 drf-yasg = "^1.21.7"
+pydantic = "^2.6.4"
 
 
 [build-system]

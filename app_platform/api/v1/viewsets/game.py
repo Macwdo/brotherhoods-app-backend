@@ -27,5 +27,7 @@ class GameViewSet(ModelViewSet):
             return Response(status=status.HTTP_200_OK)
 
         except GameAlreadyExistsException:
-            data = {"message": "Não foi possível criar jogo da semana, já foi criado o da ultíma e da proxíma."}
+            data = {
+                "message": "Não foi possível criar jogo da semana, já foi criado o da ultíma e da proxíma."
+            }
             return Response(status=status.HTTP_400_BAD_REQUEST, data=data)
