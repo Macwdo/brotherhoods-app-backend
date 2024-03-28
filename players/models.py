@@ -1,13 +1,15 @@
 from __future__ import annotations
 
-from utils.models import BaseModel
+from utils.database.models import BaseModel
 from django.db import models
+
+from utils.database.queryset import BaseQuerySet
 
 
 class PlayerManager(models.Manager): ...
 
 
-class PlayerQuerySet(models.QuerySet):
+class PlayerQuerySet(BaseQuerySet):
     def get_monthly_players(self):
         return self.filter(is_monthly_player=True)
 

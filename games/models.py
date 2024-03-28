@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from django.db import models
 
-from utils.models import BaseModel
+from utils.database.models import BaseModel
+from utils.database.queryset import BaseQuerySet
 from utils.time import (
     get_previous_wednesday_date,
     get_next_wednesday_date,
@@ -19,7 +20,7 @@ class GameManager(models.Manager):
         return self.create(game_day=next_wednesday)
 
 
-class GameQuerySet(models.QuerySet):
+class GameQuerySet(BaseQuerySet):
     def get_month_games(self):
         next_wedsnesday = get_next_wednesday_date()
         return self.filter(
