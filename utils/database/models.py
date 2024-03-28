@@ -13,6 +13,7 @@ class TimeStampModelMixin(models.Model):
 class SoftDeleteModelMixin(models.Model):
     deleted = models.BooleanField(default=False)
     deleted_at = models.DateTimeField(null=True, default=None)
+
     def soft_delete(self):
         self.deleted_at = timezone.now()
         self.deleted = True
@@ -29,7 +30,7 @@ class SoftDeleteModelMixin(models.Model):
 
 class BaseModelMixins(TimeStampModelMixin, SoftDeleteModelMixin):
     class Meta:
-        abstract= True
+        abstract = True
 
 
 class BaseModel(BaseModelMixins):

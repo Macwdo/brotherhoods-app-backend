@@ -31,7 +31,7 @@ urlpatterns += [
 
 urlpatterns += [
     path("api/", include("players.urls"), name="players"),
-    path("api/", include("games.urls"), name="games")
+    path("api/", include("games.urls"), name="games"),
 ]
 urlpatterns += [
     path(
