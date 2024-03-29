@@ -1,4 +1,4 @@
-from django.db import models
+from utils.database.soft_delete import SoftDeleteManager
 
 
-class BaseManager(models.Manager): ...
+class BaseManager(SoftDeleteManager): ...

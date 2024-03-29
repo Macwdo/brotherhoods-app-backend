@@ -5,28 +5,28 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("players", "0002_player_deleted_playerbill_deleted_and_more"),
+        ('players', '0002_player_deleted_playerbill_deleted_and_more'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="player",
-            name="deleted_at",
+            model_name='player',
+            name='deleted_at',
             field=models.DateTimeField(default=None, null=True),
         ),
         migrations.AddField(
-            model_name="playerbill",
-            name="deleted_at",
+            model_name='playerbill',
+            name='deleted_at',
             field=models.DateTimeField(default=None, null=True),
         ),
         migrations.AddField(
-            model_name="playersgames",
-            name="deleted_at",
+            model_name='playersgames',
+            name='deleted_at',
             field=models.DateTimeField(default=None, null=True),
         ),
         migrations.AddField(
-            model_name="playervisits",
-            name="deleted_at",
+            model_name='playervisits',
+            name='deleted_at',
             field=models.DateTimeField(default=None, null=True),
         ),
     ]

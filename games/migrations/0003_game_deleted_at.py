@@ -5,13 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("games", "0002_game_deleted"),
+        ('games', '0002_game_deleted'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="game",
-            name="deleted_at",
+            model_name='game',
+            name='deleted_at',
             field=models.DateTimeField(default=None, null=True),
         ),
     ]

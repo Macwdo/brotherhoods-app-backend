@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.db import models
 
+from utils.database.manager import BaseManager
 from utils.database.models import BaseModel
 from utils.database.queryset import BaseQuerySet
 from utils.time import (
@@ -10,7 +11,7 @@ from utils.time import (
 )
 
 
-class GameManager(models.Manager):
+class GameManager(BaseManager):
     def create_previous_week_game(self):
         previous_wednesday = get_previous_wednesday_date()
         return self.create(game_day=previous_wednesday)

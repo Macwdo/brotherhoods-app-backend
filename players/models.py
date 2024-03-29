@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+from utils.database.manager import BaseManager
 from utils.database.models import BaseModel
 from django.db import models
 
 from utils.database.queryset import BaseQuerySet
 
 
-class PlayerManager(models.Manager): ...
+class PlayerManager(BaseManager): ...
 
 
 class PlayerQuerySet(BaseQuerySet):

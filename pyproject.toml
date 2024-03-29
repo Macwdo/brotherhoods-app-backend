@@ -23,17 +23,7 @@ DJANGO_SETTINGS_MODULE = "project.settings"
 # -- recommended but optional:
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
-[tool.ruff]
-exclude = [
-    ".git",
-    ".mypy_cache",
-    ".pytest_cache",
-    ".ruff_cache",
-    ".venv",
-    "venv",
-    ".vscode",
-    "migrations"
-]
+[tool.mypy]
 
 
 [build-system]
