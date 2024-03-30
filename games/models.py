@@ -17,12 +17,12 @@ class GameManager(BaseManager):
         previous_wednesday = get_previous_wednesday_date()
         return self.create(game_day=previous_wednesday)
 
-    def create_next_week_game(self):
+    def create_next_week_game(self) -> Game:
         next_wednesday = get_next_wednesday_date()
         return self.create(game_day=next_wednesday)
     
     
-    def get_previous_week_game(self) -> GameQuerySet:
+    def get_previous_week_game(self) -> Game | None:
         try:
             previous_wednesday = get_previous_wednesday_date()
             return self.get(
@@ -33,7 +33,7 @@ class GameManager(BaseManager):
         except self.model.DoesNotExist:
             return None
 
-    def get_next_week_game(self):
+    def get_next_week_game(self) -> Game | None:
         try: 
             next_wednesday = get_next_wednesday_date()
             return self.get(
