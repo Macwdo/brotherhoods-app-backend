@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 
-from games.api.serializers import GameSerializer
+from games.api.serializers import GameSerializer, WeekGamesSerializer
 from games.models import Game
 
 from games.services import GameService
@@ -21,11 +21,25 @@ class GameViewSet(ModelViewSet):
     serializer_class = GameSerializer
     permission_classes = [IsAuthenticated]
 
+    service = GameService()
+
+    @action(detail=False, methods=["GET"], url_path="week-games")
+    def get_week_games(self, request: Request):
+        week_games = self.service.get_week_games()
+        serializer = WeekGamesSerializer(data=week_games)
+        serializer.is_valid()
+        return Response(
+            status=status.HTTP_200_OK,
+            data=serializer.data
+        )
+
+
     @action(detail=False, methods=["POST"], url_path="week")
     def create_week_game(self, request: Request):
         try:
-            GameService().create_week_game()
-            return Response(status=status.HTTP_200_OK)
+            game = self.service.create_week_game()
+            serializer = GameSerializer(instance=game)
+            return Response(status=status.HTTP_200_OK, data=serializer.data)
 
         except GameAlreadyExistsException:
             data = {

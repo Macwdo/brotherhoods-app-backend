@@ -1,4 +1,5 @@
 from __future__ import annotations
+from time import strftime
 
 from django.db import models
 
@@ -19,7 +20,29 @@ class GameManager(BaseManager):
     def create_next_week_game(self):
         next_wednesday = get_next_wednesday_date()
         return self.create(game_day=next_wednesday)
+    
+    
+    def get_previous_week_game(self) -> GameQuerySet:
+        try:
+            previous_wednesday = get_previous_wednesday_date()
+            self.get(
+                game_day__day=previous_wednesday.day,
+                game_day__month=previous_wednesday.month,
+                game_day__year=previous_wednesday.year,
+            )
+        except self.model.DoesNotExist:
+            return None
 
+    def get_next_week_game(self):
+        try: 
+            next_wednesday = get_next_wednesday_date()
+            self.get(
+                game_day__day=next_wednesday.day,
+                game_day__month=next_wednesday.month,
+                game_day__year=next_wednesday.year,
+            )
+        except self.model.DoesNotExist:
+            return None
 
 class GameQuerySet(BaseQuerySet):
     def get_month_games(self) -> GameQuerySet:
@@ -29,24 +52,14 @@ class GameQuerySet(BaseQuerySet):
             game_day__year=next_wedsnesday.year,
         )
 
-    def get_last_game(self) -> GameQuerySet:
-        previous_wednesday = get_previous_wednesday_date()
-        return self.filter(
-            game_day__day=previous_wednesday.day,
-            game_day__month=previous_wednesday.month,
-            game_day__year=previous_wednesday.year,
-        )
-
-    def get_next_game(self):
-        next_wednesday = get_next_wednesday_date()
-        return self.filter(
-            game_day__day=next_wednesday.day,
-            game_day__month=next_wednesday.month,
-            game_day__year=next_wednesday.year,
-        )
-
 
 class Game(BaseModel):
     game_day = models.DateTimeField()
 
     objects = GameManager.from_queryset(GameQuerySet)()
+
+    def __str__(self) -> str:
+        return f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
+    
+    def __repr__(self) -> str:
+        return f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
