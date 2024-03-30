@@ -1,6 +1,6 @@
 from django.db import models
 
-from utils.database.soft_delete import SoftDeleteModelMixin
+from utils.database.soft_delete import SoftDeleteModel
 
 
 class TimeStampModelMixin(models.Model):
@@ -11,7 +11,7 @@ class TimeStampModelMixin(models.Model):
         abstract = True
 
 
-class BaseModelMixins(TimeStampModelMixin, SoftDeleteModelMixin):
+class BaseModelMixins(TimeStampModelMixin, SoftDeleteModel):
     class Meta:
         abstract = True
 

@@ -4,7 +4,7 @@ from authentication.types import LoginRequest, TokenResponse
 
 
 class AuthMixin(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.get_token_url = reverse("token_obtain_pair")
         self.refresh_token_url = reverse("token_refresh")
 

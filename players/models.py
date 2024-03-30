@@ -1,4 +1,4 @@
-from __future__ import annotations
+from __future__ import annotations, absolute_import
 
 from utils.database.manager import BaseManager
 from utils.database.models import BaseModel
@@ -11,10 +11,10 @@ class PlayerManager(BaseManager): ...
 
 
 class PlayerQuerySet(BaseQuerySet):
-    def get_monthly_players(self):
+    def get_monthly_players(self) -> PlayerQuerySet:
         return self.filter(is_monthly_player=True)
 
-    def get_active_players(self):
+    def get_active_players(self) -> PlayerQuerySet:
         return self.filter(active=True)
 
 
@@ -37,7 +37,7 @@ class PlayerVisits(BaseModel):
     payed_value = models.DecimalField(default=0, max_digits=5, decimal_places=2)
 
     @property
-    def payed(self):
+    def payed(self) -> bool:
         return self.payed_value > 0
 
 

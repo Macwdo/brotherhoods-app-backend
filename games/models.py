@@ -22,14 +22,14 @@ class GameManager(BaseManager):
 
 
 class GameQuerySet(BaseQuerySet):
-    def get_month_games(self):
+    def get_month_games(self) -> GameQuerySet:
         next_wedsnesday = get_next_wednesday_date()
         return self.filter(
             game_day__month=next_wedsnesday.month,
             game_day__year=next_wedsnesday.year,
         )
 
-    def get_last_game(self):
+    def get_last_game(self) -> GameQuerySet:
         previous_wednesday = get_previous_wednesday_date()
         return self.filter(
             game_day__day=previous_wednesday.day,

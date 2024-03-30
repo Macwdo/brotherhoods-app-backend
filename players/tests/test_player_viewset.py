@@ -7,7 +7,7 @@ from authentication.types import LoginRequest
 
 
 class PlayerViewSetTest(AuthMixin):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
         username, password = "username", "password"
         self.__user = User.objects.create(
