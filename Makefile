@@ -10,6 +10,11 @@ format:
 tests:
 	pytest
 
+coverage:
+	coverage run -m pytest
+	coverage html
+
+
 migrations:
 	python manage.py makemigrations
 

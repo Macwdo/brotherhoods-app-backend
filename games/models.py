@@ -25,7 +25,7 @@ class GameManager(BaseManager):
     def get_previous_week_game(self) -> GameQuerySet:
         try:
             previous_wednesday = get_previous_wednesday_date()
-            self.get(
+            return self.get(
                 game_day__day=previous_wednesday.day,
                 game_day__month=previous_wednesday.month,
                 game_day__year=previous_wednesday.year,
@@ -36,7 +36,7 @@ class GameManager(BaseManager):
     def get_next_week_game(self):
         try: 
             next_wednesday = get_next_wednesday_date()
-            self.get(
+            return self.get(
                 game_day__day=next_wednesday.day,
                 game_day__month=next_wednesday.month,
                 game_day__year=next_wednesday.year,

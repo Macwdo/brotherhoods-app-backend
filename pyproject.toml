@@ -21,6 +21,7 @@ django-stubs = {extras = ["compatible-mypy"], version = "^4.2.7"}
 djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^3.14.5"}
 psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.1"
+coverage = "^7.4.4"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "project.settings"

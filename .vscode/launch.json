@@ -33,6 +33,13 @@
             ],
             "django": true,
             "autoStartBrowser": false
+        },
+        {
+            "name": "Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/bin/pytest",
+            "args": []
         }
     ]
 }

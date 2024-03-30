@@ -26,8 +26,7 @@ class GameViewSet(ModelViewSet):
     @action(detail=False, methods=["GET"], url_path="week-games")
     def get_week_games(self, request: Request):
         week_games = self.service.get_week_games()
-        serializer = WeekGamesSerializer(data=week_games)
-        serializer.is_valid()
+        serializer = WeekGamesSerializer(week_games)
         return Response(
             status=status.HTTP_200_OK,
             data=serializer.data

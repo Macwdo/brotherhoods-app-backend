@@ -11,5 +11,5 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
 
 class WeekGamesSerializer(serializers.Serializer):
-    next = GameSerializer(many=False, read_only=True)
-    previous = GameSerializer(many=False, read_only=True)
+    next = GameSerializer(many=False)
+    previous = GameSerializer(many=False)
