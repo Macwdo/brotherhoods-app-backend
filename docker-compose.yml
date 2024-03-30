@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+
+  db:
+    image:
+      postgres:16.2-alpine3.19
+    env_file:
+      .env
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/postgres:/var/lib/postgresql/data/
+
+#  app:
+#    build: .
+#  rabbitmq:
+#    image:
+#      rabbitmq:3.13-management-alpine
+#
+#    restart: always

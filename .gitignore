@@ -1,3 +1,6 @@
+# Docker
+.data
+
 # Django #
 *.log
 *.pot
@@ -6,25 +9,12 @@ __pycache__
 db.sqlite3
 media
 
+# Venv
+.venv/
+venv/
+
 # Backup files #
 *.bak
-
-
-
-# AWS User-specific
-.idea/**/aws.xml
-
-# Generated files
-.idea/**/contentModel.xml
-
-# Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
 
 # Python #
 *.py[cod]
@@ -71,4 +61,7 @@ celerybeat-schedule.*
 
 # mypy
 .mypy_cache/
+
+#ruff
+.ruff_cache
 
