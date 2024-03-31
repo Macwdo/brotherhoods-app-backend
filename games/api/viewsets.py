@@ -1,12 +1,11 @@
 import logging
 
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 
+from authentication.api.viewsets import AuthenticedModelViewSet
 from games.api.serializers import GameSerializer, WeekGamesSerializer
 from games.models import Game
 
@@ -16,10 +15,9 @@ from games.services import GameAlreadyExistsException
 logger = logging.getLogger(__name__)
 
 
-class GameViewSet(ModelViewSet):
+class GameViewSet(AuthenticedModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
-    permission_classes = [IsAuthenticated]
 
     service = GameService()
 

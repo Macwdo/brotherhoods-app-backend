@@ -28,6 +28,12 @@ class Player(BaseModel):
 
     objects = PlayerManager.from_queryset(PlayerQuerySet)()
 
+    def __str__(self) -> str:
+        return f"Player[id={self.id}, name={self.name}]"
+    
+    def __repr__(self) -> str:
+        return f"Player[id={self.id}, name={self.name}]"
+
 
 class PlayerVisits(BaseModel):
     player = models.ForeignKey(

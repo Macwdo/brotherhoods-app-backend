@@ -1,7 +1,4 @@
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
-
+from authentication.api.viewsets import AuthenticedModelViewSet
 from players.api.serializers import (
     PlayerSerializer,
     PlayerBillSerializer,
@@ -10,41 +7,25 @@ from players.api.serializers import (
 from players.models import Player, PlayerBill, PlayersGames
 
 
-class ApiAuthMixin:
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+class PlayerRelationModelViewSet(AuthenticedModelViewSet):
 
+    def get_queryset(self):
+        return self.queryset.filter(player_id=self.kwargs["player_pk"])
 
-class AuthenticedModelViewSet(ModelViewSet, ApiAuthMixin):
-    class Meta:
-        abstract = True
+    def perform_create(self, serializer):
+        serializer.save(player_id=self.kwargs["player_pk"])
 
 
 class PlayerViewSet(AuthenticedModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class PlayerBillViewSet(ModelViewSet):
+class PlayerBillViewSet(PlayerRelationModelViewSet):
     queryset = PlayerBill.objects.all()
     serializer_class = PlayerBillSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return self.queryset.filter(player_id=self.kwargs["player_pk"])
-
-    def perform_create(self, serializer):
-        serializer.save(player_id=self.kwargs["player_pk"])
 
 
-class PlayersGamesViewSet(ModelViewSet):
+class PlayersGamesViewSet(PlayerRelationModelViewSet):
     queryset = PlayersGames.objects.all()
     serializer_class = PlayersGamesSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return self.queryset.filter(player_id=self.kwargs["player_pk"])
-
-    def perform_create(self, serializer):
-        serializer.save(player_id=self.kwargs["player_pk"])

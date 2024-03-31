@@ -18,23 +18,23 @@ class GameViewSetAuthTest(APITestCase):
         self.__user_data = {"username": "username", "password": "password"}
         self.__user = User.objects.create(**self.__user_data, is_active=True)
 
-    @pytest.mark.viewset
     @pytest.mark.auth
-    def test_get_game_by_unauthenticated_user_should_return_401(self):
-        url = reverse("games:game-list")
-
-        response = self.client.get(url)
-
-        assert response.status_code == status.HTTP_401_UNAUTHORIZED
-
     @pytest.mark.viewset
-    @pytest.mark.auth
     def test_get_game_by_authenticated_user_should_return_200(self):
         url = reverse("games:game-list")
         self.client.force_authenticate(user=self.__user)
         response = self.client.get(url)
 
         assert response.status_code == status.HTTP_200_OK
+
+    @pytest.mark.auth
+    @pytest.mark.viewset
+    def test_get_game_by_unauthenticated_user_should_return_401(self):
+        url = reverse("games:game-list")
+
+        response = self.client.get(url)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
 class GameViewSetUrlsTest(SimpleTestCase):
@@ -118,7 +118,9 @@ class GameViewSetTest(APITestCase, GameMixins, AuthMixin):
         assert next_week_game == next_week_game_by_response_id
 
     @pytest.mark.viewset
-    def test_create_week_game_should_raise_an_error_when_week_games_already_exists(self):
+    def test_create_week_game_should_raise_an_error_when_week_games_already_exists(
+        self,
+    ):
         self.__service.create_week_game()
         self.__service.create_week_game()
 
@@ -126,7 +128,7 @@ class GameViewSetTest(APITestCase, GameMixins, AuthMixin):
         response = self.client.post(url)
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert response.data.get("message") == "Não foi possível criar jogo da semana, já foi criado o da ultíma e da proxíma."
-
-
-
+        assert (
+            response.data.get("message")
+            == "Não foi possível criar jogo da semana, já foi criado o da ultíma e da proxíma."
+        )

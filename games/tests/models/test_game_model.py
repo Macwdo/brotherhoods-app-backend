@@ -9,7 +9,6 @@ from games.tests.mixins.game_mixins import GameMixins
 
 # WARN: SimpleTestCase are not allowed to use db from django
 class GameModelTest(TestCase, GameMixins):
-
     @pytest.mark.model
     def test_get_month_games(self):
         self.create_game()
@@ -23,9 +22,15 @@ class GameModelTest(TestCase, GameMixins):
     @pytest.mark.model
     def test_game_str(self):
         game = self.create_game()
-        assert str(game) == f"Game[id={game.id}, game_day={game.game_day.strftime('%d/%m/%Y')}]"
+        assert (
+            str(game)
+            == f"Game[id={game.id}, game_day={game.game_day.strftime('%d/%m/%Y')}]"
+        )
 
     @pytest.mark.model
     def test_game_repr(self):
         game = self.create_game()
-        assert repr(game) == f"Game[id={game.id}, game_day={game.game_day.strftime('%d/%m/%Y')}]"
+        assert (
+            repr(game)
+            == f"Game[id={game.id}, game_day={game.game_day.strftime('%d/%m/%Y')}]"
+        )
