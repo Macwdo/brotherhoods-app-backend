@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 from os import getenv
 from datetime import timedelta
 from pathlib import Path
@@ -91,16 +92,14 @@ WSGI_APPLICATION = "project.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': getenv('POSTGRES_NAME'),
-        'HOST': getenv('POSTGRES_HOST'),
-        'PASSWORD': getenv('POSTGRES_PASSWORD'),
-        'USER': getenv('POSTGRES_USER'),
-        'PORT': getenv('POSTGRES_PORT'),
-        'TEST': {
-            'NAME': getenv('TEST_DATABASE_NAME')
-        }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": getenv("POSTGRES_NAME"),
+        "HOST": getenv("POSTGRES_HOST"),
+        "PASSWORD": getenv("POSTGRES_PASSWORD"),
+        "USER": getenv("POSTGRES_USER"),
+        "PORT": getenv("POSTGRES_PORT"),
+        "TEST": {"NAME": getenv("TEST_DATABASE_NAME")},
     }
 }
 

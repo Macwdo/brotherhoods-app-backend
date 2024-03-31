@@ -14,10 +14,11 @@ class GameService:
         self.__player_repository = Player.objects
 
     def get_week_games(self) -> WeekGames:
-        previous_week_game: Game | None = self.__repository.get_previous_week_game()
+        previous_week_game: Game | None = (
+            self.__repository.get_previous_week_game()
+        )
         next_week_game: Game | None = self.__repository.get_next_week_game()
         return WeekGames(previous=previous_week_game, next=next_week_game)
-    
 
     @transaction.atomic
     def create_week_game(self) -> Game:
@@ -37,8 +38,7 @@ class GameService:
 
     def __add_all_monthly_players(self, game) -> None:
         monthly_players = (
-            self.__player_repository
-            .get_monthly_players()
+            self.__player_repository.get_monthly_players()
             .get_active_players()
             .values("id", "is_monthly_player")
         )

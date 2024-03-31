@@ -3,5 +3,4 @@ from games.models import Game
 
 
 @admin.register(Game)
-class GameAdmin(admin.ModelAdmin):
-    ...
+class GameAdmin(admin.ModelAdmin): ...

@@ -23,17 +23,23 @@ class GameViewSet(ModelViewSet):
 
     service = GameService()
 
-    @action(detail=False, methods=["GET"], url_path="week-games")
+    @action(
+        detail=False,
+        methods=["GET"],
+        url_path="week-games",
+        url_name="week-games",
+    )
     def get_week_games(self, request: Request):
         week_games = self.service.get_week_games()
         serializer = WeekGamesSerializer(week_games)
-        return Response(
-            status=status.HTTP_200_OK,
-            data=serializer.data
-        )
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
 
-
-    @action(detail=False, methods=["POST"], url_path="week")
+    @action(
+        detail=False,
+        methods=["POST"],
+        url_path="week",
+        url_name="create-week-game",
+    )
     def create_week_game(self, request: Request):
         try:
             game = self.service.create_week_game()

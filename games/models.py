@@ -1,8 +1,7 @@
 from __future__ import annotations
-from time import strftime
 
 from django.db import models
-
+from django.utils import timezone
 from utils.database.manager import BaseManager
 from utils.database.models import BaseModel
 from utils.database.queryset import BaseQuerySet
@@ -20,8 +19,7 @@ class GameManager(BaseManager):
     def create_next_week_game(self) -> Game:
         next_wednesday = get_next_wednesday_date()
         return self.create(game_day=next_wednesday)
-    
-    
+
     def get_previous_week_game(self) -> Game | None:
         try:
             previous_wednesday = get_previous_wednesday_date()
@@ -34,7 +32,7 @@ class GameManager(BaseManager):
             return None
 
     def get_next_week_game(self) -> Game | None:
-        try: 
+        try:
             next_wednesday = get_next_wednesday_date()
             return self.get(
                 game_day__day=next_wednesday.day,
@@ -44,9 +42,10 @@ class GameManager(BaseManager):
         except self.model.DoesNotExist:
             return None
 
+
 class GameQuerySet(BaseQuerySet):
     def get_month_games(self) -> GameQuerySet:
-        next_wedsnesday = get_next_wednesday_date()
+        next_wedsnesday = timezone.now()
         return self.filter(
             game_day__month=next_wedsnesday.month,
             game_day__year=next_wedsnesday.year,
@@ -59,7 +58,11 @@ class Game(BaseModel):
     objects = GameManager.from_queryset(GameQuerySet)()
 
     def __str__(self) -> str:
-        return f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
-    
+        return (
+            f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
+        )
+
     def __repr__(self) -> str:
-        return f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
+        return (
+            f"Game[id={self.id}, game_day={self.game_day.strftime('%d/%m/%Y')}]"
+        )

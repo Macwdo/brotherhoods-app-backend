@@ -1,3 +1,4 @@
+import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
@@ -28,6 +29,7 @@ class PlayerViewSetTest(AuthMixin):
         expected_url = "/api/players/1/"
         assert reverse(reverse_url, args=(1,)) == expected_url
 
+    @pytest.mark.auth
     def test_authenticated_user_when_get_should_returns_200(self):
         url = reverse("players:player-list")
         credentials = self.__user_credentials
