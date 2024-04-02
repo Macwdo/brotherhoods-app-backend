@@ -52,12 +52,11 @@ class PlayerBillsViewSetUrlsTest(SimpleTestCase):
 
 
 class PlayerBillsViewSet(APITestCase, PlayerMixins):
-    
     def setUp(self) -> None:
         super().setUp()
         self.__user_data = {"username": "username", "password": "password"}
         self.__user = User.objects.create(**self.__user_data, is_active=True)
-        
+
         self.client.force_authenticate(user=self.__user)
 
     def test_create_player_bill_should_be_related_from_player(self):
@@ -67,7 +66,7 @@ class PlayerBillsViewSet(APITestCase, PlayerMixins):
         data = {
             "due_date": timezone.now(),
             "payed_date": timezone.now(),
-            "payed_value": Decimal("92.43")
+            "payed_value": Decimal("92.43"),
         }
         response = self.client.post(url, data=data)
 
@@ -76,4 +75,3 @@ class PlayerBillsViewSet(APITestCase, PlayerMixins):
 
         player_bill = PlayerBill.objects.get(id=response.data["id"])
         assert player_bill.player.id == response.data["player"]["id"]
-    

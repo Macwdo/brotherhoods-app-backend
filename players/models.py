@@ -3,6 +3,7 @@ from __future__ import annotations, absolute_import
 from utils.database.manager import BaseManager
 from utils.database.models import BaseModel
 from django.db import models
+from django.utils import timezone
 
 from utils.database.queryset import BaseQuerySet
 
@@ -30,17 +31,18 @@ class Player(BaseModel):
 
     def __str__(self) -> str:
         return f"Player[id={self.id}, name={self.name}]"
-    
+
     def __repr__(self) -> str:
         return f"Player[id={self.id}, name={self.name}]"
 
 
 class PlayerVisits(BaseModel):
+    visit_day = models.DateTimeField()
+    payed_value = models.DecimalField(default=0, max_digits=5, decimal_places=2)
+
     player = models.ForeignKey(
         "Player", related_name="visits", on_delete=models.CASCADE
     )
-    visit_day = models.DateTimeField()
-    payed_value = models.DecimalField(default=0, max_digits=5, decimal_places=2)
 
     @property
     def payed(self) -> bool:
@@ -57,6 +59,18 @@ class PlayerBill(BaseModel):
     player = models.ForeignKey(
         "Player", related_name="bills", on_delete=models.PROTECT
     )
+
+    @property
+    def payed(self) -> bool:
+        return self.payed_value > 0
+
+    @property
+    def is_overdue(self):
+        return not self.payed and self.due_date > timezone.now()
+
+    @property
+    def was_overdue_payment(self):
+        return self.payed and self.payed_date > self.due_date
 
 
 class PlayersGames(BaseModel):

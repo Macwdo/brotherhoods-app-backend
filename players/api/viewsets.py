@@ -8,7 +8,6 @@ from players.models import Player, PlayerBill, PlayersGames
 
 
 class PlayerRelationModelViewSet(AuthenticedModelViewSet):
-
     def get_queryset(self):
         return self.queryset.filter(player_id=self.kwargs["player_pk"])
 
