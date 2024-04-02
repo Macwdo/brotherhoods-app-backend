@@ -56,18 +56,13 @@ class PlayerBill(BaseModel):
         max_digits=5, decimal_places=2, blank=False
     )
 
-    player = models.ForeignKey(
-        "Player", related_name="bills", on_delete=models.PROTECT
-    )
-
+    player = models.ForeignKey("Player", related_name="bills", on_delete=models.PROTECT)
     @property
     def payed(self) -> bool:
         return self.payed_value > 0
-
     @property
     def is_overdue(self):
         return not self.payed and self.due_date > timezone.now()
-
     @property
     def was_overdue_payment(self):
         return self.payed and self.payed_date > self.due_date
@@ -76,7 +71,9 @@ class PlayerBill(BaseModel):
 class PlayersGames(BaseModel):
     as_monthly_player = models.BooleanField(default=False)
 
-    game = models.ForeignKey("games.Game", related_name="games", on_delete=models.PROTECT)
+    game = models.ForeignKey(
+        "games.Game", related_name="games", on_delete=models.PROTECT
+    )
     player = models.ForeignKey(
         "Player", related_name="games", on_delete=models.PROTECT
     )
