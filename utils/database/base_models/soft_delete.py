@@ -25,7 +25,7 @@ class SoftDeleteModel(models.Model):
 
 class SoftDeleteQuerySet(models.QuerySet[SoftDeleteModel]):
     def deleted(self) -> models.QuerySet[SoftDeleteModel]:
-        return self.filter(deleted=False)
+        return self.filter(deleted=True)
 
 
 class SoftDeleteManager(models.Manager[SoftDeleteModel]): ...
