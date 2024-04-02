@@ -76,9 +76,7 @@ class PlayerBill(BaseModel):
 class PlayersGames(BaseModel):
     as_monthly_player = models.BooleanField(default=False)
 
-    game = models.ForeignKey(
-        "games.Game", related_name="games", on_delete=models.PROTECT
-    )
+    game = models.ForeignKey("games.Game", related_name="games", on_delete=models.PROTECT)
     player = models.ForeignKey(
         "Player", related_name="games", on_delete=models.PROTECT
     )
