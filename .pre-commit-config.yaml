@@ -1,6 +1,9 @@
-#TODO: Add ruff checker
 repos:
 -   repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.3.5
     hooks:
-    - id: ruff
+    # Run Linter
+    -   id: ruff
+        args: [ --fix ]
+    # Run format
+    -   id: ruff-format
