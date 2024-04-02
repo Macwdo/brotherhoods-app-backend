@@ -33,12 +33,11 @@ class PlayerVisitsModelTest(TestCase, PlayerMixins):
         assert self.__player_visit.payed
 
 
-
 class PlayerBillsModelTest(TestCase, PlayerMixins):
     def setUp(self):
         self.__player_bill = self.create_player_bill(payed_value=10)
 
-    @pytest.mark.model       
+    @pytest.mark.model
     def test_player_bill_payed_value(self):
         assert self.__player_bill.payed
 
