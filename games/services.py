@@ -8,29 +8,23 @@ class GameAlreadyExistsException(Exception): ...
 
 
 class GameService:
-    def __init__(self):
-        self.__repository = Game.objects
-        self.__players_games_repository = PlayersGames.objects
-        self.__player_repository = Player.objects
-
     def get_week_games(self) -> WeekGames:
-        previous_week_game: Game | None = (
-            self.__repository.get_previous_week_game()
-        )
-        next_week_game: Game | None = self.__repository.get_next_week_game()
+        previous_week_game: Game | None = Game.objects.get_previous_week_game()
+        next_week_game: Game | None = Game.objects.get_next_week_game()
         return WeekGames(previous=previous_week_game, next=next_week_game)
 
     @transaction.atomic
+    #TODO: Create service tests and test logic with freezed time
     def create_week_game(self) -> Game:
-        last_game = self.__repository.get_previous_week_game()
+        last_game = Game.objects.get_previous_week_game()
         if not last_game:
-            game = self.__repository.create_previous_week_game()
+            game = Game.objects.create_previous_week_game()
             self.__add_all_monthly_players(game)
             return game
 
-        next_game = self.__repository.get_next_week_game()
+        next_game = Game.objects.get_next_week_game()
         if not next_game:
-            game = self.__repository.create_next_week_game()
+            game = Game.objects.create_next_week_game()
             self.__add_all_monthly_players(game)
             return game
 
@@ -38,7 +32,7 @@ class GameService:
 
     def __add_all_monthly_players(self, game) -> None:
         monthly_players = (
-            self.__player_repository.get_monthly_players()
+            Player.objects.get_monthly_players()
             .get_active_players()
             .values("id", "is_monthly_player")
         )
@@ -50,4 +44,4 @@ class GameService:
             )
             for player in monthly_players
         ]
-        self.__players_games_repository.bulk_create(players_games_instances)
+        PlayersGames.objects.bulk_create(players_games_instances)
