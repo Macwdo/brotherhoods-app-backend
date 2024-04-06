@@ -23,6 +23,7 @@ psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.1"
 coverage = "^7.4.4"
 pre-commit = "^3.7.0"
+django-cors-headers = "^4.3.1"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "project.settings"

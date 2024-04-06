@@ -34,6 +34,9 @@ DEBUG = getenv("DEBUG")
 
 ALLOWED_HOSTS: list[str] = getenv("ALLOWED_HOSTS", "*").split(",")
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"] # getenv("CORS_ALLOWED_ORIGINS", "*").split(",")
+CORS_ALLOW_ALL_ORIGINS = getenv("CORS_ALLOW_ALL_ORIGINS", True)
+
 
 # Application definition
 
@@ -50,6 +53,7 @@ FRAMEWORKS_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "corsheaders"
 ]
 
 APPLICATION_APPS = ["authentication", "games", "players"]
@@ -66,6 +70,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_MIDDLEWARES = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware"
+]
+
+MIDDLEWARE += CORS_MIDDLEWARES
 
 ROOT_URLCONF = "project.urls"
 

@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class SoftDeleteModel(models.Model):
     deleted = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField(null=True, default=None)
+    deleted_at = models.DateTimeField(null=True, default=None, blank=True)
 
     def soft_delete(self) -> SoftDeleteModel:
         self.deleted_at = timezone.now()

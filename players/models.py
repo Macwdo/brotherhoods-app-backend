@@ -26,6 +26,9 @@ class Player(BaseModel):
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     is_monthly_player = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
+    birth_date = models.DateField(blank=True, null=True)
+    email = models.CharField(max_length=255, blank=True, null=True)
+
 
     objects = PlayerManager.from_queryset(PlayerQuerySet)()
 
