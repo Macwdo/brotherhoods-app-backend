@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 from uuid import uuid4
-from players.models import Player, PlayerBill, PlayerVisits
+from players.models import Player, PlayerBills, PlayerVisits
 
 
 class PlayerMixins:
@@ -32,11 +32,11 @@ class PlayerMixins:
         due_date: datetime = timezone.now(),
         payed_date: datetime = timezone.now(),
         payed_value: float = 0,
-    ) -> PlayerBill:
+    ) -> PlayerBills:
         if not player:
             player = self.create_player()
 
-        return PlayerBill.objects.create(
+        return PlayerBills.objects.create(
             due_date=due_date,
             payed_date=payed_date,
             payed_value=payed_value,

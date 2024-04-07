@@ -4,7 +4,7 @@ from players.api.serializers import (
     PlayerBillSerializer,
     PlayersGamesSerializer,
 )
-from players.models import Player, PlayerBill, PlayersGames
+from players.models import Player, PlayerBills, PlayersGames
 
 
 class PlayerRelationModelViewSet(AuthenticedModelViewSet):
@@ -21,7 +21,7 @@ class PlayerViewSet(AuthenticedModelViewSet):
 
 
 class PlayerBillViewSet(PlayerRelationModelViewSet):
-    queryset = PlayerBill.objects.all()
+    queryset = PlayerBills.objects.all()
     serializer_class = PlayerBillSerializer
 
 

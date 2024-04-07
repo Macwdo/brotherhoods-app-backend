@@ -52,9 +52,9 @@ class PlayerVisits(BaseModel):
         return self.payed_value > 0
 
 
-class PlayerBill(BaseModel):
+class PlayerBills(BaseModel):
     due_date = models.DateTimeField()
-    payed_date = models.DateTimeField()
+    payed_date = models.DateTimeField(blank=True, null=True)
     payed_value = models.DecimalField(
         max_digits=5, decimal_places=2, blank=False
     )

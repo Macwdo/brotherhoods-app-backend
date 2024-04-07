@@ -1,0 +1,57 @@
+[
+  {
+    "model": "players.playersgames",
+    "pk": 1,
+    "fields": {
+      "as_monthly_player": true,
+      "game": 1,
+      "player": 1,
+      "created_at": "2024-01-20",
+      "updated_at": "2024-01-20"
+    }
+  },
+  {
+    "model": "players.playersgames",
+    "pk": 2,
+    "fields": {
+      "as_monthly_player": false,
+      "game": 2,
+      "player": 2,
+      "created_at": "2024-01-20",
+      "updated_at": "2024-01-20"
+    }
+  },
+  {
+    "model": "players.playersgames",
+    "pk": 3,
+    "fields": {
+      "as_monthly_player": true,
+      "game": 3,
+      "player": 3,
+      "created_at": "2024-01-20",
+      "updated_at": "2024-01-20"
+    }
+  },
+  {
+    "model": "players.playersgames",
+    "pk": 4,
+    "fields": {
+      "as_monthly_player": false,
+      "game": 1,
+      "player": 2,
+      "created_at": "2024-01-20",
+      "updated_at": "2024-01-20"
+    }
+  },
+  {
+    "model": "players.playersgames",
+    "pk": 5,
+    "fields": {
+      "as_monthly_player": true,
+      "game": 2,
+      "player": 1,
+      "created_at": "2024-01-20",
+      "updated_at": "2024-01-20"
+    }
+  }
+]

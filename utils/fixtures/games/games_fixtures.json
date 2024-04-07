@@ -1,0 +1,51 @@
+
+
+[
+    {
+        "model": "games.game",
+        "pk": 1,
+        "fields": {
+            "game_day": "2024-03-10",
+            "created_at": "2024-01-01T00:00:00",
+            "updated_at": "2024-01-01T00:00:00"
+        }
+    },
+    {
+        "model": "games.game",
+        "pk": 2,
+        "fields": {
+            "game_day": "2024-03-11",
+            "created_at": "2024-01-01T00:00:00",
+            "updated_at": "2024-01-01T00:00:00"
+        }
+    },
+    {
+        "model": "games.game",
+        "pk": 3,
+        "fields": {
+            "game_day": "2024-03-12",
+            "created_at": "2024-01-01T00:00:00",
+            "updated_at": "2024-01-01T00:00:00"
+        }
+    },
+    {
+        "model": "games.game",
+        "pk": 4,
+        "fields": {
+            "game_day": "2024-03-13",
+            "created_at": "2024-01-01T00:00:00",
+            "updated_at": "2024-01-01T00:00:00"
+        }
+    },
+    {
+        "model": "games.game",
+        "pk": 5,
+        "fields": {
+            "game_day": "2024-03-14",
+            "created_at": "2024-01-01T00:00:00",
+            "updated_at": "2024-01-01T00:00:00"
+        }
+    }
+
+
+]

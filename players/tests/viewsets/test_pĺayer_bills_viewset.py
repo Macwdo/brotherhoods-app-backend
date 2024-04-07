@@ -8,7 +8,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 
-from players.models import PlayerBill
+from players.models import PlayerBills
 from players.tests.mixins.player_mixins import PlayerMixins
 
 
@@ -73,5 +73,5 @@ class PlayerBillsViewSet(APITestCase, PlayerMixins):
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data["player"]["id"] == player.id
 
-        player_bill = PlayerBill.objects.get(id=response.data["id"])
+        player_bill = PlayerBills.objects.get(id=response.data["id"])
         assert player_bill.player.id == response.data["player"]["id"]
