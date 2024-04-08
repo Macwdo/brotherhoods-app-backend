@@ -77,6 +77,24 @@ class PlayerViewSetTest(PlayerMixins, APITestCase):
         assert response.status_code == status.HTTP_201_CREATED
 
     @pytest.mark.api
+    def test_player_list_filter_by_name(self):
+        found_user = self.create_player(name="Test Name")
+        self.create_player(
+            name="Another Name",
+            surname="",
+            alias="",
+            phone_number="+",
+            email="",
+        )
+
+        url = reverse("players:player-list") + f"?search={found_user.name}"
+
+        response = self.client.get(url)
+
+        assert response.data["results"][0]["name"] == "Test Name"
+        assert len(response.data["results"]) == 1
+
+    @pytest.mark.api
     @freeze_time("2024-04-07T22:00:00-03:00")
     def test_player_list_response(self):
         player = self.create_player(birth_date=timezone.now())
