@@ -14,7 +14,7 @@ class GameService:
         return WeekGames(previous=previous_week_game, next=next_week_game)
 
     @transaction.atomic
-    #TODO: Create service tests and test logic with freezed time
+    # TODO: Create service tests and test logic with freezed time
     def create_week_game(self) -> Game:
         last_game = Game.objects.get_previous_week_game()
         if not last_game:

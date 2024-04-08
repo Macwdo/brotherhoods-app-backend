@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.test import TestCase
-from authentication.types import LoginRequest, TokenResponse
+from project.types.auth import LoginRequest, TokenResponse
 
 
 class AuthMixin(TestCase):

@@ -29,7 +29,6 @@ class Player(BaseModel):
     birth_date = models.DateField(blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
 
-
     objects = PlayerManager.from_queryset(PlayerQuerySet)()
 
     def __str__(self) -> str:

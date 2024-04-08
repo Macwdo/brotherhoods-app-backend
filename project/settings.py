@@ -34,7 +34,9 @@ DEBUG = getenv("DEBUG")
 
 ALLOWED_HOSTS: list[str] = getenv("ALLOWED_HOSTS", "*").split(",")
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"] # getenv("CORS_ALLOWED_ORIGINS", "*").split(",")
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]  # getenv("CORS_ALLOWED_ORIGINS", "*").split(",")
 CORS_ALLOW_ALL_ORIGINS = getenv("CORS_ALLOW_ALL_ORIGINS", True)
 
 
@@ -52,11 +54,10 @@ INSTALLED_APPS = [
 FRAMEWORKS_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
-    "drf_yasg",
-    "corsheaders"
+    "corsheaders",
 ]
 
-APPLICATION_APPS = ["authentication", "games", "players"]
+APPLICATION_APPS = ["games", "players"]
 
 INSTALLED_APPS += FRAMEWORKS_APPS
 INSTALLED_APPS += APPLICATION_APPS
@@ -73,7 +74,7 @@ MIDDLEWARE = [
 
 CORS_MIDDLEWARES = [
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware"
+    "django.middleware.common.CommonMiddleware",
 ]
 
 MIDDLEWARE += CORS_MIDDLEWARES
@@ -160,11 +161,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
 }
 
 # Simple JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }

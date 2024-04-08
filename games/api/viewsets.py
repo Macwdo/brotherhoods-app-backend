@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from authentication.api.viewsets import AuthenticedModelViewSet
+from project.api.viewsets.base_viewsets import BaseModelViewSet
 from games.api.serializers import GameSerializer, WeekGamesSerializer
 from games.models import Game
 
@@ -15,11 +15,11 @@ from games.services import GameAlreadyExistsException
 logger = logging.getLogger(__name__)
 
 
-class GameViewSet(AuthenticedModelViewSet):
-    queryset = Game.objects.all()
+class GameViewSet(BaseModelViewSet):
+    queryset = Game.objects.all().order_by("-game_day")
     serializer_class = GameSerializer
 
-    service = GameService()
+    __service = GameService()
 
     @action(
         detail=False,
@@ -28,7 +28,7 @@ class GameViewSet(AuthenticedModelViewSet):
         url_name="week-games",
     )
     def get_week_games(self, request: Request):
-        week_games = self.service.get_week_games()
+        week_games = self.__service.get_week_games()
         serializer = WeekGamesSerializer(week_games)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
@@ -40,7 +40,7 @@ class GameViewSet(AuthenticedModelViewSet):
     )
     def create_week_game(self, request: Request):
         try:
-            game = self.service.create_week_game()
+            game = self.__service.create_week_game()
             serializer = GameSerializer(instance=game)
             return Response(status=status.HTTP_200_OK, data=serializer.data)
 
