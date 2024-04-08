@@ -17,6 +17,15 @@ class PlayerQuerySet(BaseQuerySet):
 
     def get_active_players(self) -> PlayerQuerySet:
         return self.filter(active=True)
+    
+    def search_players_by_string_fields(self, search_term: str) -> PlayerQuerySet:
+        return self.filter(
+            models.Q(name__icontains=search_term)
+            | models.Q(surname__icontains=search_term)
+            | models.Q(alias__icontains=search_term)
+            | models.Q(phone_number__icontains=search_term)
+            | models.Q(email__icontains=search_term)
+        )
 
 
 class Player(BaseModel):

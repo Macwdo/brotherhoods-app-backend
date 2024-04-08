@@ -8,7 +8,7 @@ from players.models import Player, PlayerBills, PlayersGames
 
 
 class PlayerRelationModelViewSet(BaseModelViewSet):
-    def get_queryset(self):
+    def get_queryset(self):        
         return super().get_queryset().filter(player_id=self.kwargs["player_pk"])
 
     def perform_create(self, serializer):
@@ -18,6 +18,17 @@ class PlayerRelationModelViewSet(BaseModelViewSet):
 class PlayerViewSet(BaseModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+
+    def get_queryset(self):
+        search_term = self.request.query_params.get("search")
+        if search_term:
+            return (
+                self.queryset
+                .search_players_by_string_fields(search_term)
+                .order_by("-created_at")
+            )
+        
+        return super().get_queryset()
 
 
 class PlayerBillViewSet(PlayerRelationModelViewSet):
