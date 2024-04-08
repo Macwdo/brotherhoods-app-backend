@@ -20,11 +20,11 @@ class PlayerQuerySet(BaseQuerySet):
     
     def search_players_by_string_fields(self, search_term: str) -> PlayerQuerySet:
         return self.filter(
-            models.Q(name__icontains=search_term)
-            | models.Q(surname__icontains=search_term)
-            | models.Q(alias__icontains=search_term)
-            | models.Q(phone_number__icontains=search_term)
-            | models.Q(email__icontains=search_term)
+            models.Q(name__istartswith=search_term)
+            | models.Q(surname__istartswith=search_term)
+            | models.Q(alias__istartswith=search_term)
+            | models.Q(phone_number__istartswith=search_term)
+            | models.Q(email__istartswith=search_term)
         )
 
 
