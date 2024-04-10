@@ -22,14 +22,11 @@ class BasePagination(PageNumberPagination):
     pass
 
     def get_paginated_response(self, data):
-        # if you want to show page size in resposne just add these 2 lines
         if self.request.query_params.get("page_size"):
             self.page_size = int(self.request.query_params.get("page_size"))
 
-        # you can count total page from request by total and page_size
         total_page = math.ceil(self.page.paginator.count / self.page_size)
 
-        # here is your response
         return Response(
             {
                 "count": self.page.paginator.count,
@@ -46,9 +43,6 @@ class BaseModelViewSet(AuthenticedModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(deleted=False).order_by("-created_at")
-
-    def perform_destroy(self, instance):
-        instance.soft_delete()
 
     class Meta:
         abstract = True
