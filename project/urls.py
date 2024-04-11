@@ -5,6 +5,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from project.api.viewsets.user_viewsets import user_by_credentials
+
+
 urlpatterns = [path("admin/", admin.site.urls)]
 urlpatterns += [
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
@@ -14,4 +17,6 @@ urlpatterns += [
 urlpatterns += [
     path("api/", include("players.urls"), name="players"),
     path("api/", include("games.urls"), name="games"),
+    
+    path("api/me/", user_by_credentials, name="me"),
 ]
