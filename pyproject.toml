@@ -18,16 +18,16 @@ pytest = "^8.1.1"
 pytest-django = "^4.8.0"
 django-stubs = {extras = ["compatible-mypy"], version = "^4.2.7"}
 djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^3.14.5"}
-psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.1"
 coverage = "^7.4.4"
 pre-commit = "^3.7.0"
 django-cors-headers = "^4.3.1"
 freezegun = "^1.4.0"
 django-filter = "^24.2"
+psycopg2-binary = "^2.9.9"
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "project.settings"
+DJANGO_SETTINGS_MODULE = "core.settings"
 # -- recommended but optional:
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 

@@ -1,14 +1,14 @@
 check:
 	@echo Checking code 🧐
-	.venv/bin/ruff check
+	ruff check
 
 fix:
 	@echo Fixing code 🧹
-	.venv/bin/ruff check --fix
+	ruff check --fix
 
 format:
 	@echo Formatting code 🧹
-	.venv/bin/ruff format
+	ruff format
 
 tests:
 	@echo Running tests 🧪
